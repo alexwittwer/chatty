@@ -3,29 +3,20 @@ extends layout
 block content
     form(action="" method="POST").sty-signup 
         .form-group
-            label(for="firstName") First name
-            input(type="text" name="firstName" required value= (undefined === user 
+            label(for="username") Username 
+            input(type="text" name="username" required value= (undefined === user 
             ? '' 
-            : user.firstName))
-        .form-group
-            label(for="lastName") Last name 
-            input(type="text" name= "lastName" required value= (undefined === user 
-            ? '' 
-            : user.lastName))
+            : user.username)) 
         .form-group
             label(for="email") Email 
             input(type="email" name="email" required value= (undefined === user 
             ? '' 
             : user.email)) 
         .form-group
-            label(for="username") Username 
-            input(type="text" name="username" required value= (undefined === user 
-            ? '' 
-            : user.username)) 
-        .form-group
             label(for="password") Password 
             input(type="password" name = "password" required )
-        .form-group
+        .form-group 
+            //-  Should make this actually work later...
             label(for="password-confirm") Confirm Password 
             input(type="password" name="password-confirm" required)  
 
