@@ -4,11 +4,15 @@ const user_controller = require("../controllers/user_controller");
 
 /* GET home page. */
 router.get("/", (req, res, next) => {
-  res.render("index");
+  res.render("index", { user: req.user });
 });
 
-router.get("/signup", function (req, res, next) {
-  res.render("signup", { title: "Express" });
+router.get("/signup", (req, res) => {
+  res.render("signup");
+});
+
+router.get("/login", (req, res) => {
+  res.render("login");
 });
 
 router.post("/signup", user_controller.sign_up_post);

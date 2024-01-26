@@ -3,16 +3,16 @@ const Schema = mongoose.Schema;
 
 const UserSchema = new Schema({
   username: { type: String, default: this.firstName },
-  firstName: { type: String, required: true },
-  lastName: { type: String, required: true },
   isMember: { type: Boolean, default: false },
   password: { type: String, required: true },
   email: { type: String, required: true },
-  date: { type: Date, required: true },
-  messages: {
-    type: mongoose.Schema.Types.ObjectId,
-    ref: "Message",
-  },
+  date: { type: Date, required: true, default: Date.now },
+  messages: [
+    {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "Message",
+    },
+  ],
 });
 
 UserSchema.virtual("url").get(function () {

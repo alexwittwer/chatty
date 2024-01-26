@@ -4,38 +4,21 @@ const path = require("path");
 const session = require("express-session");
 const passport = require("passport");
 const LocalStrategy = require("passport-local").Strategy;
+const mongoose = require("mongoose");
 const cookieParser = require("cookie-parser");
 const logger = require("morgan");
+const User = require("./models/user");
 require("dotenv").config();
 
 const indexRouter = require("./routes/index");
 const usersRouter = require("./routes/users");
+const messageRouter = require("./routes/messages");
 
-const mongoose = require("mongoose");
-mongoose.set("strictQuery", false);
 const mongoDB = process.env.MONGODB_URI;
-
-async function main() {
-  console.log("Attempting to connect to MongoDB...");
-  await mongoose.connect(mongoDB);
-  console.log("Connection Successful!");
-}
-
-async function start() {
-  try {
-    main();
-  } catch (err) {
-    console.error(err);
-  }
-}
-
-start();
-
-const app = express();
-
-// view engine setup
-app.set("views", path.join(__dirname, "views"));
-app.set("view engine", "pug");
+mongoose.connect(mongoDB);
+const db = mongoose.connection;
+db.on("error", console.error.bind(console, "Error connecting to MongoDB"));
+db.once("connect", () => console.log("Connected to MongoDB"));
 
 //auth
 passport.use(
@@ -48,12 +31,33 @@ passport.use(
       if (user.password !== password) {
         return done(null, false, { message: "Incorrect password" });
       }
+      console.log("success");
       return done(null, user);
     } catch (err) {
       return done(err);
     }
   })
 );
+
+passport.serializeUser((user, done) => {
+  console.log(user);
+  done(null, user.id);
+});
+
+passport.deserializeUser(async (id, done) => {
+  try {
+    const user = await User.findById(id);
+    done(null, user);
+  } catch (err) {
+    done(err);
+  }
+});
+
+const app = express();
+
+// view engine setup
+app.set("views", path.join(__dirname, "views"));
+app.set("view engine", "pug");
 
 app.use(logger("dev"));
 app.use(express.json());
@@ -63,6 +67,14 @@ app.use(passport.session());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, "public")));
+
+app.post(
+  "/login",
+  passport.authenticate("local", {
+    successRedirect: "/chat",
+    failureRedirect: "/",
+  })
+);
 
 app.use("/", indexRouter);
 app.use("/users", usersRouter);

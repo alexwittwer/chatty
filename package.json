@@ -8,6 +8,7 @@
     "sass": "sass --watch src/stylesheets/style.scss public/stylesheets/style.css"
   },
   "dependencies": {
+    "bcrypt": "^5.1.1",
     "cookie-parser": "~1.4.4",
     "debug": "~2.6.9",
     "dotenv": "^16.4.1",

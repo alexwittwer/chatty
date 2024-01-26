@@ -5,32 +5,15 @@ const User = require("../models/user");
 const { DateTime } = require("luxon");
 
 exports.user_get = asyncHandler(async (req, res, next) => {
-  res.send("NOT IMPLEMENTED YET");
-});
-exports.user_list_get = asyncHandler(async (req, res, next) => {
-  res.send("NOT IMPLEMENTED YET");
-});
-exports.user_create_get = asyncHandler(async (req, res, next) => {
-  res.send("NOT IMPLEMENTED YET");
-});
-exports.user_create_post = asyncHandler(async (req, res, next) => {
-  res.send("NOT IMPLEMENTED YET");
-});
-exports.user_delete_get = asyncHandler(async (req, res, next) => {
-  res.send("NOT IMPLEMENTED YET");
-});
-exports.user_delete_post = asyncHandler(async (req, res, next) => {
-  res.send("NOT IMPLEMENTED YET");
-});
-exports.user_update_post = asyncHandler(async (req, res, next) => {
-  res.send("NOT IMPLEMENTED YET");
-});
-exports.user_update_get = asyncHandler(async (req, res, next) => {
-  res.send("NOT IMPLEMENTED YET");
+  const user = User.findById(req.params.id).exec();
+
+  res.render("user_page", { user: user });
 });
 
-exports.user_messages_get = asyncHandler(async (req, res, next) => {
-  res.send("NOT IMPLEMENTED YET");
+exports.user_list_get = asyncHandler(async (req, res, next) => {
+  const users = User.find().exec();
+
+  res.render("user_list", { users: users });
 });
 
 exports.sign_up_get = asyncHandler(async (req, res, next) => {
@@ -67,3 +50,20 @@ exports.sign_up_post = [
     }
   }),
 ];
+
+exports.user_delete_get = asyncHandler(async (req, res, next) => {
+  res.send("NOT IMPLEMENTED YET");
+});
+exports.user_delete_post = asyncHandler(async (req, res, next) => {
+  res.send("NOT IMPLEMENTED YET");
+});
+exports.user_update_post = asyncHandler(async (req, res, next) => {
+  res.send("NOT IMPLEMENTED YET");
+});
+exports.user_update_get = asyncHandler(async (req, res, next) => {
+  res.send("NOT IMPLEMENTED YET");
+});
+
+exports.user_messages_get = asyncHandler(async (req, res, next) => {
+  res.send("NOT IMPLEMENTED YET");
+});
