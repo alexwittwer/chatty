@@ -1,0 +1,32 @@
+@mixin sm {
+  @media screen AND (max-width: 599px) {
+    @content;
+  }
+}
+@mixin md {
+  @media (min-width: 600px) {
+    @content;
+  }
+}
+@mixin lg {
+  @media (min-width: 900px) {
+    @content;
+  }
+}
+@mixin xl {
+  @media (min-width: 1200px) {
+    @content;
+  }
+}
+
+.root {
+  padding: 0px;
+  margin: 0px;
+}
+
+.sty-signup {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
