@@ -1,27 +1,28 @@
 extends layout
 
 block content
-    form(action="" method="POST").sty-signup 
-        .form-group
-            label(for="username") Username 
-            input(type="text" name="username" required value= (undefined === user 
-            ? '' 
-            : user.username)) 
-        .form-group
-            label(for="email") Email 
-            input(type="email" name="email" required value= (undefined === user 
-            ? '' 
-            : user.email)) 
-        .form-group
-            label(for="password") Password 
-            input(type="password" name = "password" required )
-        .form-group 
-            //-  Should make this actually work later...
-            label(for="password-confirm") Confirm Password 
-            input(type="password" name="password-confirm" required)  
+    .sty-signup 
+        form(action="" method="POST").sty-form
+            .form-group
+                label(for="username") Username 
+                input(type="text" name="username" required value= (undefined === user 
+                ? '' 
+                : user.username)) 
+            .form-group
+                label(for="email") Email 
+                input(type="email" name="email" required value= (undefined === user 
+                ? '' 
+                : user.email)) 
+            .form-group
+                label(for="password") Password 
+                input(type="password" name = "password" required )
+            .form-group 
+                //-  Should make this actually work later...
+                label(for="password-confirm") Confirm Password 
+                input(type="password" name="password-confirm" required)  
 
-        button Submit
-    if errors
-        ul
-            for error in errors
-                li!= error.msg
+            button Submit
+        if errors
+            ul
+                for error in errors
+                    li!= error.msg

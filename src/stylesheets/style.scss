@@ -19,9 +19,39 @@
   }
 }
 
-.root {
+@mixin sty-link {
+  text-decoration: none;
+  color: #fff;
+  padding: 20px;
+  box-sizing: border-box;
+  cursor: pointer;
+  transition: 250ms;
+  border-bottom: 4px solid transparent;
+  &:hover {
+    border-bottom: 4px solid $p3;
+  }
+}
+
+// colors
+
+$p1: #333;
+$p2: #010;
+$p3: #91db5f;
+$p4: #fcfcfc;
+
+:root {
+  font-family: "Noto Sans", sans-serif;
   padding: 0px;
   margin: 0px;
+  background-color: $p1;
+  color: $p4;
+}
+
+.content {
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
 }
 
 .sty-signup {
@@ -29,12 +59,62 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  max-width: 100%;
+}
+
+.sty-form {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  padding: 20px;
+  min-width: 50%;
+  background-color: #222222;
+}
+
+.form-group {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 24px;
+}
+
+input {
+  background-color: #222;
+  padding: 8px;
+  border-style: none;
+  border-bottom: 2px solid #fff;
 }
 
 .sty-link {
-  text-decoration: none;
-  background-color: #333;
-  color: #fff;
-  padding: 20px;
-  cursor: pointer;
+  @include sty-link;
+  background-color: #3b3d39;
+}
+
+.sty-logo {
+  @include sty-link;
+  font-family: "Titan One", sans-serif;
+  font-size: 24px;
+}
+
+nav {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.nav-links {
+  display: flex;
+  gap: 8px;
+}
+
+.hero {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.hero-links {
+  display: flex;
+  justify-content: center;
+  gap: 12px;
 }

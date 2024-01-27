@@ -60,6 +60,7 @@ app.set("views", path.join(__dirname, "views"));
 app.set("view engine", "pug");
 
 app.use(logger("dev"));
+app.use(express.static("public"));
 app.use(express.json());
 app.use(session({ secret: "cats", resave: false, saveUninitialized: true }));
 app.use(passport.initialize());
@@ -71,10 +72,19 @@ app.use(express.static(path.join(__dirname, "public")));
 app.post(
   "/login",
   passport.authenticate("local", {
-    successRedirect: "/chat",
+    successRedirect: "/",
     failureRedirect: "/",
   })
 );
+
+app.get("/logout", (req, res, next) => {
+  req.logout((err) => {
+    if (err) {
+      return next(err);
+    }
+    res.redirect("/");
+  });
+});
 
 app.use("/", indexRouter);
 app.use("/users", usersRouter);
