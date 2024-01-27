@@ -134,7 +134,6 @@ nav {
   gap: 12px;
   padding: 12px;
   max-height: 70vh;
-  max-width: 80%;
 }
 
 .message-body {
@@ -155,6 +154,9 @@ nav {
 .add-message {
   display: flex;
   justify-content: center;
+  align-items: center;
+  max-width: 80%;
+  margin: 0px auto;
 }
 
 .add-group {
