@@ -6,6 +6,16 @@ block content
             p #{user.username}
             p #{user.email}
             p #{user.dateFormatted}
+            if (user.isAdmin)
+                p Admin
+            if (user.isMember)
+                p Member
+            if (!user.isAdmin || !user.isMember)    
+                form(method="post") 
+                    .form-group
+                        label(for="password") Upgrade Password: 
+                        input(type="password" name="password") 
+                        button.sty-button Upgrade
     else 
         h1 Please log in 
         a(href="/login").sty-link Login

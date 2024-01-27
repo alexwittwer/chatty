@@ -202,3 +202,12 @@ nav {
     font-size: 24px;
   }
 }
+
+.sty-delete {
+  @include btn;
+  font-size: 18px;
+  background-color: rgb(153, 54, 54);
+  &:hover {
+    border-bottom: 4px solid $p3;
+  }
+}

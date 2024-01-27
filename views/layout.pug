@@ -12,10 +12,13 @@ html
     .root
       .content
         nav 
-          a(href="/").nav-logo.sty-logo Chatty
+          if (user)
+            a(href="/chat").nav-logo.sty-logo Chatty
+          else 
+            a(href="/").nav-logo.sty-logo Chatty
           .nav-links 
             if (user)
-              a(href="/profile").sty-link Profile 
+              a(href=`/profile/${user.id}`).sty-link Profile 
               a(href="/logout").sty-link Logout
             else 
               a(href="/login").sty-link Login

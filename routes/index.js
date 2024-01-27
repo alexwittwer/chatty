@@ -15,9 +15,11 @@ router.get("/login", (req, res) => {
   res.render("login");
 });
 
-router.get("/profile", (req, res) => {
+router.get("/profile/:id", (req, res) => {
   res.render("profile", { user: req.user });
 });
+
+router.post("/profile/:id", user_controller.user_admin_add);
 
 router.post("/signup", user_controller.sign_up_post);
 

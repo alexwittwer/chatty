@@ -1,13 +1,11 @@
 const asyncHandler = require("express-async-handler");
 const { body, validationResult } = require("express-validator");
 const Message = require("../models/message");
-const User = require("../models/user");
-const { DateTime } = require("luxon");
 
 exports.message_single_get = asyncHandler(async (req, res, next) => {
   const message = Message.findById(req.params.id).exec();
 
-  res.render("message", { message: message });
+  res.render("chat", { message: message });
 });
 exports.message_list_get = asyncHandler(async (req, res, next) => {
   const messages = await Message.find().exec();
@@ -36,3 +34,13 @@ exports.message_create = [
     }
   }),
 ];
+
+exports.message_delete = asyncHandler(async (req, res, next) => {
+  try {
+    await Message.findByIdAndDelete(req.params.id).exec();
+  } catch (err) {
+    res.status(500).json({ message: err });
+  }
+
+  res.redirect("/chat");
+});

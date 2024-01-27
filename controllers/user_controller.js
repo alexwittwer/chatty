@@ -4,6 +4,7 @@ const Message = require("../models/message");
 const User = require("../models/user");
 const bcryptjs = require("bcryptjs");
 const { DateTime } = require("luxon");
+require("dotenv").config();
 
 exports.user_get = asyncHandler(async (req, res, next) => {
   const user = User.findById(req.params.id).exec();
@@ -57,6 +58,23 @@ exports.sign_up_post = [
     }
   }),
 ];
+
+exports.user_admin_add = asyncHandler(async (req, res, next) => {
+  if (req.body.password === process.env.ADMIN_PW) {
+    await User.findByIdAndUpdate(req.params.id, {
+      isAdmin: true,
+      isMember: true,
+    });
+  }
+
+  if (req.body.password === process.env.MEMBER_PW) {
+    await User.findByIdAndUpdate(req.params.id, {
+      isMember: true,
+    });
+  }
+
+  res.redirect(`/chat`);
+});
 
 exports.user_delete_get = asyncHandler(async (req, res, next) => {
   res.send("NOT IMPLEMENTED YET");

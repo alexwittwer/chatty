@@ -86,7 +86,7 @@ app.get("/logout", (req, res, next) => {
       return next(err);
     }
   });
-  res.redirect("chat");
+  res.redirect("/chat");
 });
 
 app.use("/", indexRouter);

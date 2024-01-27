@@ -168,4 +168,27 @@ nav {
   font-size: 24px;
 }
 
+.sty-delete {
+  border-style: none;
+  color: #fcfcfc;
+  max-width: 10ch;
+  background-color: #2e8315;
+  text-align: center;
+  align-self: center;
+  padding: 12px;
+  margin-top: 18px;
+  font-size: 24px;
+  cursor: pointer;
+  transition: 250ms;
+  border-bottom: 4px solid transparent;
+  font-size: 18px;
+  background-color: rgb(153, 54, 54);
+}
+.sty-delete:hover {
+  border-bottom: 4px solid #fcfcfc;
+}
+.sty-delete:hover {
+  border-bottom: 4px solid #91db5f;
+}
+
 /*# sourceMappingURL=style.css.map */

@@ -4,18 +4,26 @@ block content
     .chat
         each message in messages
             .message-body
-                if (user)
+                if (user && user.isMember)
                     .message-user #{message.user}
                     .message-text #{message.text}
+                    .message-text #{message.dateFormatted}
+                    if (user.isAdmin)
+                        - (console.log(message.id))
+                        form(action=`/chat/${message.id}` method='post') 
+                            button(type = "submit").sty-delete Delete
                 else 
                     .message-user Anonymous 
                     .message-text #{message.text}
 
+    if (user)
+        .add-message
+            form(action="/chat" method="post") 
+                .add-group 
+                    label(for="message") 
+                    input(type="text" required name="message")
 
-    .add-message
-        form(action="/chat" method="post") 
-            .add-group 
-                label(for="message") 
-                input(type="text" required name="message")
-
-                button.sty-button Add
+                    button.sty-button Add
+    else 
+        .hero
+            a(href="/login").sty-link Login

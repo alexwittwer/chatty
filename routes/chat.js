@@ -7,4 +7,6 @@ router.get("/", message_controller.message_list_get);
 
 router.post("/", message_controller.message_create);
 
+router.post("/:id", message_controller.message_delete);
+
 module.exports = router;
