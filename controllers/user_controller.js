@@ -1,9 +1,7 @@
 const asyncHandler = require("express-async-handler");
 const { body, validationResult } = require("express-validator");
-const Message = require("../models/message");
 const User = require("../models/user");
 const bcryptjs = require("bcryptjs");
-const { DateTime } = require("luxon");
 require("dotenv").config();
 
 exports.user_get = asyncHandler(async (req, res, next) => {
@@ -74,20 +72,4 @@ exports.user_admin_add = asyncHandler(async (req, res, next) => {
   }
 
   res.redirect(`/chat`);
-});
-
-exports.user_delete_get = asyncHandler(async (req, res, next) => {
-  res.send("NOT IMPLEMENTED YET");
-});
-exports.user_delete_post = asyncHandler(async (req, res, next) => {
-  res.send("NOT IMPLEMENTED YET");
-});
-exports.user_update_post = asyncHandler(async (req, res, next) => {
-  res.send("NOT IMPLEMENTED YET");
-});
-exports.user_update_get = asyncHandler(async (req, res, next) => {
-  res.send("NOT IMPLEMENTED YET");
-});
-exports.user_messages_get = asyncHandler(async (req, res, next) => {
-  res.send("NOT IMPLEMENTED YET");
 });
