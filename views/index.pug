@@ -2,8 +2,9 @@ extends layout
 
 block content
   if(user) 
-    h1 Welcome back, #{user.username}
-    a(href="/logout").sty-link Logout 
+    .hero
+      h1 Welcome back, #{user.username}
+      a(href="/chat").sty-link Enter chat
   else
     .hero
       h1 Chatty 

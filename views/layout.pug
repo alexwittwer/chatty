@@ -14,8 +14,11 @@ html
         nav 
           a(href="/").nav-logo.sty-logo Chatty
           .nav-links 
-            a(href="/profile").sty-link Profile 
-            a(href="/chat").sty-link Chat
+            if (user)
+              a(href="/profile").sty-link Profile 
+              a(href="/logout").sty-link Logout
+            else 
+              a(href="/login").sty-link Login
 
         main 
           block content

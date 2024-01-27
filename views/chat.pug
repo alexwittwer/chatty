@@ -1,3 +1,21 @@
 extends layout
 
 block content
+    .chat
+        each message in messages
+            .message-body
+                if (user)
+                    .message-user #{message.user}
+                    .message-text #{message.text}
+                else 
+                    .message-user Anonymous 
+                    .message-text #{message.text}
+
+
+    .add-message
+        form(action="/chat" method="post") 
+            .add-group 
+                label(for="message") 
+                input(type="text" required name="message")
+
+                button.sty-button Add

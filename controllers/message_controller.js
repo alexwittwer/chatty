@@ -10,7 +10,29 @@ exports.message_single_get = asyncHandler(async (req, res, next) => {
   res.render("message", { message: message });
 });
 exports.message_list_get = asyncHandler(async (req, res, next) => {
-  const messages = Message.find().exec();
+  const messages = await Message.find().exec();
 
-  res.render("chat", { messages: messages });
+  res.render("chat", { messages: messages, user: req.user });
 });
+
+exports.message_create = [
+  body("text").trim().escape(),
+
+  asyncHandler(async (req, res, next) => {
+    const errors = validationResult(req);
+
+    const message = new Message({
+      user: req.user.username,
+      text: req.body.message,
+    });
+
+    if (!errors.isEmpty()) {
+      res.render("chat", {
+        errors: errors.array(),
+      });
+    } else {
+      await message.save();
+      res.redirect("/chat");
+    }
+  }),
+];

@@ -19,7 +19,7 @@
   }
 }
 
-@mixin sty-link {
+@mixin link {
   text-decoration: none;
   color: #fff;
   padding: 20px;
@@ -32,12 +32,33 @@
   }
 }
 
+@mixin btn {
+  border-style: none;
+  color: $p4;
+  max-width: 10ch;
+  background-color: $p5;
+  text-align: center;
+  align-self: center;
+  padding: 12px;
+  margin-top: 18px;
+  font-size: 24px;
+  cursor: pointer;
+  transition: 250ms;
+  border-bottom: 4px solid transparent;
+  &:hover {
+    border-bottom: 4px solid $p4;
+  }
+}
+
 // colors
 
 $p1: #333;
 $p2: #010;
 $p3: #91db5f;
 $p4: #fcfcfc;
+$p5: #2e8315;
+$p6: #e7e40e;
+$p7: #64a538;
 
 :root {
   font-family: "Noto Sans", sans-serif;
@@ -52,6 +73,17 @@ $p4: #fcfcfc;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
+  ::-webkit-scrollbar {
+    width: 10px;
+  }
+
+  ::-webkit-scrollbar-track {
+    box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
+  }
+
+  ::-webkit-scrollbar-thumb {
+    background-color: $p5;
+  }
 }
 
 .sty-signup {
@@ -80,20 +112,27 @@ $p4: #fcfcfc;
 
 input {
   background-color: #222;
+  color: #fff;
   padding: 8px;
   border-style: none;
   border-bottom: 2px solid #fff;
 }
 
 .sty-link {
-  @include sty-link;
+  @include link;
+  margin-top: 12px;
   background-color: #3b3d39;
 }
 
+.sty-button {
+  @include btn;
+}
+
 .sty-logo {
-  @include sty-link;
+  @include link;
   font-family: "Titan One", sans-serif;
   font-size: 24px;
+  color: $p6;
 }
 
 nav {
@@ -117,4 +156,49 @@ nav {
   display: flex;
   justify-content: center;
   gap: 12px;
+}
+
+.chat {
+  display: flex;
+  margin: 0px auto;
+  flex-flow: column nowrap;
+  overflow-y: auto;
+  gap: 12px;
+  padding: 12px;
+  max-height: 70vh;
+  max-width: 80%;
+}
+
+.message-body {
+  display: flex;
+  flex-flow: column nowrap;
+  border-radius: 8px;
+  background-color: $p4;
+  color: $p2;
+  gap: 8px;
+  font-size: 24px;
+  padding: 12px;
+}
+
+.message-user {
+  font-weight: 700;
+}
+
+.message-text {
+}
+
+.add-message {
+  display: flex;
+  justify-content: center;
+}
+
+.add-group {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  input {
+    padding: 12px;
+    margin-top: 18px;
+    font-size: 24px;
+  }
 }

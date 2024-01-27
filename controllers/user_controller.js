@@ -2,6 +2,7 @@ const asyncHandler = require("express-async-handler");
 const { body, validationResult } = require("express-validator");
 const Message = require("../models/message");
 const User = require("../models/user");
+const bcryptjs = require("bcryptjs");
 const { DateTime } = require("luxon");
 
 exports.user_get = asyncHandler(async (req, res, next) => {
@@ -29,24 +30,30 @@ exports.sign_up_post = [
   asyncHandler(async (req, res, next) => {
     const errors = validationResult(req);
 
-    const user = new User({
-      firstName: req.body.firstName,
-      lastName: req.body.lastName,
-      username: req.body.username,
-      isMember: true,
-      email: req.body.email,
-      password: req.body.password,
-      date: Date.now(),
-    });
+    try {
+      hashedPassword = await bcryptjs.hash(req.body.password, 10);
 
-    if (!errors.isEmpty()) {
-      res.render("signup", {
-        loginDetails: user,
-        errors: errors.array(),
+      const user = new User({
+        firstName: req.body.firstName,
+        lastName: req.body.lastName,
+        username: req.body.username,
+        isMember: true,
+        email: req.body.email,
+        password: hashedPassword,
+        date: Date.now(),
       });
-    } else {
-      await user.save();
-      res.redirect("/");
+
+      if (!errors.isEmpty()) {
+        res.render("signup", {
+          loginDetails: user,
+          errors: errors.array(),
+        });
+      } else {
+        await user.save();
+        res.redirect("/");
+      }
+    } catch (err) {
+      res.status(500).render("error", { error: err });
     }
   }),
 ];
@@ -63,7 +70,6 @@ exports.user_update_post = asyncHandler(async (req, res, next) => {
 exports.user_update_get = asyncHandler(async (req, res, next) => {
   res.send("NOT IMPLEMENTED YET");
 });
-
 exports.user_messages_get = asyncHandler(async (req, res, next) => {
   res.send("NOT IMPLEMENTED YET");
 });

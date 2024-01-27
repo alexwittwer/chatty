@@ -8,11 +8,12 @@ const mongoose = require("mongoose");
 const cookieParser = require("cookie-parser");
 const logger = require("morgan");
 const User = require("./models/user");
+const bcryptjs = require("bcryptjs");
 require("dotenv").config();
 
 const indexRouter = require("./routes/index");
 const usersRouter = require("./routes/users");
-const messageRouter = require("./routes/messages");
+const chatRouter = require("./routes/chat");
 
 const mongoDB = process.env.MONGODB_URI;
 mongoose.connect(mongoDB);
@@ -25,10 +26,13 @@ passport.use(
   new LocalStrategy(async (username, password, done) => {
     try {
       const user = await User.findOne({ username: username });
+      const match = await bcryptjs.compare(password, user.password);
+
       if (!user) {
         return done(null, false, { message: "Incorrect username" });
       }
-      if (user.password !== password) {
+      if (!match) {
+        // passwords do not match!
         return done(null, false, { message: "Incorrect password" });
       }
       console.log("success");
@@ -40,7 +44,6 @@ passport.use(
 );
 
 passport.serializeUser((user, done) => {
-  console.log(user);
   done(null, user.id);
 });
 
@@ -72,7 +75,7 @@ app.use(express.static(path.join(__dirname, "public")));
 app.post(
   "/login",
   passport.authenticate("local", {
-    successRedirect: "/",
+    successRedirect: "/chat",
     failureRedirect: "/",
   })
 );
@@ -82,12 +85,13 @@ app.get("/logout", (req, res, next) => {
     if (err) {
       return next(err);
     }
-    res.redirect("/");
   });
+  res.redirect("chat");
 });
 
 app.use("/", indexRouter);
 app.use("/users", usersRouter);
+app.use("/chat", chatRouter);
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {

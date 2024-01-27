@@ -3,16 +3,17 @@ const Schema = mongoose.Schema;
 const { DateTime } = require("luxon");
 
 const MessageSchema = new Schema({
-  title: { type: String, required: true },
   text: { type: String, required: true },
-  user: { type: mongoose.Schema.Types.ObjectId, ref: "User", required: true },
-  date: { type: Date, required: true },
+  user: { type: String, required: true },
+  msgDate: { type: Date, default: Date.now },
 });
 
 MessageSchema.virtual("dateFormatted").get(function () {
-  return DateTime.fromJSDate(this.date).toLocaleString(DateTime.DATE_MED);
+  return DateTime.fromJSDate(this.msgDate).toLocaleString(DateTime.DATE_MED);
 });
 
 MessageSchema.virtual("dateISO").get(function () {
-  return DateTime.fromJSDate(this.date).toISODate();
+  return DateTime.fromJSDate(this.msgDate).toISODate();
 });
+
+module.exports = mongoose.model("Message", MessageSchema);

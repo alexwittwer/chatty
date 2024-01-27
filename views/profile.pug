@@ -1,0 +1,12 @@
+extends layout
+
+block content
+    if (user)
+        .hero
+            p #{user.username}
+            p #{user.email}
+            p #{user.dateFormatted}
+    else 
+        h1 Please log in 
+        a(href="/login").sty-link Login
+        a(href="/signup").sty-link Sign up

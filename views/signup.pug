@@ -21,7 +21,8 @@ block content
                 label(for="password-confirm") Confirm Password 
                 input(type="password" name="password-confirm" required)  
 
-            button Submit
+            button.sty-button Submit
+        a(href="/login").sty-link Have an account? Sign in
         if errors
             ul
                 for error in errors
