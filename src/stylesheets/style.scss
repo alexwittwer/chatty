@@ -111,6 +111,12 @@ textarea {
   padding: 20px;
   min-width: 50%;
   background-color: #222222;
+  input {
+    max-width: 30ch;
+    @include sm {
+      max-width: 14ch;
+    }
+  }
 }
 
 .form-group {

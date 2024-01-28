@@ -48,6 +48,14 @@ textarea {
   min-width: 50%;
   background-color: #222222;
 }
+.sty-form input {
+  max-width: 30ch;
+}
+@media screen and (max-width: 599px) {
+  .sty-form input {
+    max-width: 14ch;
+  }
+}
 
 .form-group {
   display: flex;
