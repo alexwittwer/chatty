@@ -3,12 +3,12 @@ const Schema = mongoose.Schema;
 const { DateTime } = require("luxon");
 
 const UserSchema = new Schema({
-  username: { type: String, default: this.firstName },
+  username: { type: String, default: this.firstName, unique: true },
   isMember: { type: Boolean, default: false },
   isAdmin: { type: Boolean, default: false },
   password: { type: String, required: true },
-  email: { type: String, required: true },
-  date: { type: Date, required: true, default: Date.now },
+  email: { type: String, required: true, unique: true },
+  date: { type: Date, default: Date.now },
   messages: [
     {
       type: mongoose.Schema.Types.ObjectId,
