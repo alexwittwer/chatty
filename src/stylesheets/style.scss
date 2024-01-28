@@ -68,6 +68,12 @@ $p7: #64a538;
   color: $p4;
 }
 
+input,
+textarea {
+  width: 100%;
+  display: block;
+}
+
 .content {
   height: 100vh;
   display: flex;
@@ -187,7 +193,6 @@ nav {
   display: flex;
   justify-content: center;
   align-items: center;
-  max-width: 80%;
   margin: 0px auto;
 }
 

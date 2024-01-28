@@ -6,6 +6,12 @@
   color: #fcfcfc;
 }
 
+input,
+textarea {
+  width: 100%;
+  display: block;
+}
+
 .content {
   height: 100vh;
   display: flex;
@@ -155,7 +161,6 @@ nav {
   display: flex;
   justify-content: center;
   align-items: center;
-  max-width: 80%;
   margin: 0px auto;
 }
 
