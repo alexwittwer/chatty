@@ -6,6 +6,10 @@
   color: #fcfcfc;
 }
 
+body {
+  margin: 0px;
+}
+
 input,
 textarea {
   width: 100%;
@@ -92,6 +96,11 @@ input {
 .sty-button:hover {
   border-bottom: 4px solid #fcfcfc;
 }
+@media screen and (max-width: 599px) {
+  .sty-button {
+    padding: 8px;
+  }
+}
 
 .sty-logo {
   text-decoration: none;
@@ -139,7 +148,7 @@ nav {
   overflow-y: auto;
   gap: 12px;
   padding: 12px;
-  max-height: 70vh;
+  max-height: 60vh;
 }
 
 .message-body {
@@ -151,6 +160,12 @@ nav {
   gap: 8px;
   font-size: 24px;
   padding: 12px;
+}
+@media screen and (max-width: 599px) {
+  .message-body {
+    font-size: 18px;
+    padding: 8px;
+  }
 }
 
 .message-user {
@@ -168,11 +183,18 @@ nav {
   display: flex;
   align-items: center;
   justify-content: center;
+  gap: 12px;
 }
 .add-group input {
   padding: 12px;
   margin-top: 18px;
   font-size: 24px;
+}
+@media screen and (max-width: 599px) {
+  .add-group input {
+    max-width: 80%;
+    font-size: 18px;
+  }
 }
 
 .sty-delete {

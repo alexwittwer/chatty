@@ -68,6 +68,10 @@ $p7: #64a538;
   color: $p4;
 }
 
+body {
+  margin: 0px;
+}
+
 input,
 textarea {
   width: 100%;
@@ -132,6 +136,9 @@ input {
 
 .sty-button {
   @include btn;
+  @include sm {
+    padding: 8px;
+  }
 }
 
 .sty-logo {
@@ -171,7 +178,7 @@ nav {
   overflow-y: auto;
   gap: 12px;
   padding: 12px;
-  max-height: 70vh;
+  max-height: 60vh;
 }
 
 .message-body {
@@ -183,6 +190,10 @@ nav {
   gap: 8px;
   font-size: 24px;
   padding: 12px;
+  @include sm {
+    font-size: 18px;
+    padding: 8px;
+  }
 }
 
 .message-user {
@@ -200,10 +211,15 @@ nav {
   display: flex;
   align-items: center;
   justify-content: center;
+  gap: 12px;
   input {
     padding: 12px;
     margin-top: 18px;
     font-size: 24px;
+    @include sm {
+      max-width: 80%;
+      font-size: 18px;
+    }
   }
 }
 
